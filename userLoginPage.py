@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import sqlite3
+import getpass
 from encrypt import caesar
 
 
@@ -83,7 +84,7 @@ def userLogin():
         print(str(e))
 
     if queryUser(userName):
-        passwd = input("Password: ")
+        passwd = getpass.getpass("Password: ")
         if queryPass(userName, passwd) == caesar(passwd,4):
             if firstLogin(userName) == "NULL":
                 updateLogin(userName)
@@ -124,7 +125,7 @@ def newUser(name):
             name = "new"
             continue
         else:
-            newPass = input("That username is available. Please enter your password: ")
+            newPass = getpass.getpass("That username is available. Please enter your password: ")
             insertUser(userName.title(), caesar(newPass, 4))
             reading = False
             userLogin()
